@@ -1,0 +1,54 @@
+
+{% extends "layout_base/base.html" %}
+{% block conteudo %}
+
+<div class="blog-largo">
+  <div class="container">
+    <div class="row">
+    <div class="col-md-10 mg-top-10">
+      <div class="row">
+              <div class="col-md-5 mg-top-10">
+
+                <form method="POST" action="{{ url_for('AlterarProduto') }}" >
+                  <input type="hidden" name="id_produto" value=" {{ produto.get_id() }}">
+                  
+                  <label for="input">Imagem</label>
+                  <input type="text" placeholder="digite " value="{{produto.get_imagem()}}" id="input-name" name="imagem" />
+                  
+                  <label for="input">Nome</label>
+                  <input type="text" placeholder="digite " value="{{produto.get_Nome()}}" id="input-name" name="nome" />
+                  
+                  <label for="input">Preco</label>
+                  <input type="text" placeholder="digite " value="{{produto.get_Preco()}}" id="input-preco" name="preco" />
+                  
+                  <label for="input">Quantidade</label>
+                  <input type="text" placeholder="digite quantidade"value="{{produto.get_Quantidade()}}" id="input-quantidade" name="quantidade" />
+                 
+                  <label for="input">Status</label>
+                  <select id="status" name="status">
+                    {% if produto.get_Status == 0 %}
+                    <option value="{{produto.get_Status()}}"  disabled>Atual Inativo</option>
+                    <option value="1">Ativo</option>
+                    {% else  produto.get_Status == 1%}
+                    <option value="{{produto.get_Status()}}"  disabled>Atual Ativo</option>
+                    <option value="0">Inativo</option>
+                    {% endif %}
+                  </select>                  
+                  <input type="submit"/>
+                  
+                </form>
+              </div>
+              <div class="col-md-12">
+              </div>
+            </div><!--end md-7-->
+      
+      <p><a href="{{url_for('home')}}">Voltar </a></p> 
+      </div><!--end row -->
+      </div><!--end md-10-->
+      
+
+  </div><!--end row-->
+</div><!--end container-->
+</div><!--end box-largo-->
+
+{% endblock %}

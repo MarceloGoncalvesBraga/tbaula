@@ -1,0 +1,30 @@
+
+
+
+{% extends 'layout_base/base.html' %}
+
+{% block conteudo %}
+
+  <h1><center> Welcome</center></h1>
+  <ul>
+      <li><a href="{{ url_for('novidades') }}">Novidades </a></li>
+      
+      <form method="POST" action="{{ url_for('novidades') }}" enctype="multipart/form-data" >
+  
+        <label for="input-nome">Nome</label>
+        <input type="text" placeholder="digite algo " id="input-name" name="name" />
+        
+        <label for="input-idade">Idade</label>
+        <input type="text" placeholder="digite sua Idade" id="input-name" name="idade" />
+        
+        <input type="submit"/>
+        
+      </form>
+      
+      @main.route("/salvar", methods=['POST'])
+      def salvar():
+      
+  </ul>
+
+
+{% endblock %}

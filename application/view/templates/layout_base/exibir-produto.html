@@ -1,0 +1,118 @@
+{% extends "layout_base/base.html" %}
+{% block conteudo %}
+<div class="blog-largo">
+  <div class="container">
+
+    <div id="div1">
+      <h2>Noticia</h2>
+    </div>
+    <div class="row">
+      <div class="col-md-5 mg-top-10">
+
+        <img src="{{ url_for('static', filename='img/'+ noticia.get_img())}}" class="img-center-artigo-ativo">
+      </div>
+
+      <div class="col-md-7">
+        <div class="col-md-12">
+          <h1>{{ noticia.get_titulo() }}</h1>
+
+          <p>{{ noticia.get_conteudo()|safe }}</p>
+
+        </div>
+        <div class="col-md-12">
+          <i class="fa fa-thumbs-o-up curtir fa-5" onclick="Curtir()" aria-hidden="true"></i>
+          <i class="fa fa-thumbs-o-down curtir " onclick="Descurtir()" aria-hidden="true"></i>
+          <p>
+            <span class="text">Curtidas:{{ noticia.get_likes() }} </span><span class="text"> Publicado: {{
+              noticia.get_data() }} </span> </span><span class="text"> visualizações: {{ noticia.get_visto() }} </span>
+          </p>
+          <p><a href="{{url_for('home')}}">Voltar </a></p>
+        </div>
+      </div>
+      <!--end md-12-->
+      <div class="col-md-12">
+        <h3 class="my">Comentarios:</h3>
+        {% for comentario in comentarios %}
+         <p> 
+          <label class="col-3">Nome:  {{ comentario.get_nome() }}</label>
+         <label class="col-12">{{ comentario.get_texto() }}</label></p>
+        {% endfor %}
+      </div>
+
+    </div>
+    <!--end row-->
+    <main>
+      <div class="row">
+
+
+
+        <div class="col-md-4 ">
+          <div id="alerta"></div>
+          <h3 class="my">Deixe seu Comentario:</h3>
+          <form id="formulario" name="formulario" method="POST" action="{{url_for('Salvar')}}">
+
+
+            <div class="col-12">
+              <input type="hidden" name="id_noticia" value=" {{ noticia.get_id() }}">
+              <label class="col-12">Nome:</label>
+              <input type="text" id="nome" name="nome" class="form-control coment" placeholder="Seu Nome:">
+              <label class="col-12">
+                <div class="t-e">E-mail</div>
+                <div id="msgemail"></div>
+              </label>
+
+              <input type="email" id="email" name="email" onblur="validacaoEmail(formulario.email)" maxlength="120"
+                size='65' class="form-control coment" placeholder="Seu E-mail:">
+
+              <label class="col-12">Comentario:</label>
+              <textarea id="texto" name="texto" class="form-control coment" placeholder="Comentario"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-comprar" id="enviar" value="Enviar" onsubmit="valide()">Enviar</button>
+
+          </form>
+        </div>
+        <div class="col-md-4"> </div>
+        <div class="col-md-4"> </div>
+
+
+      </div>
+    </main>
+  </div>
+  <!--end container-->
+</div>
+<!--end box-largo-->
+
+{% endblock %}
+{% block javascript %}
+<script language="Javascript">
+  function Curtir() {
+    alert("Curtida Salva");
+  };
+  function Descurtir(){
+    alert("Curtida Removida");
+  }
+</script>
+
+<script language="Javascript">
+  function validacaoEmail(field) {
+    usuario = field.value.substring(0, field.value.indexOf("@"));
+    dominio = field.value.substring(field.value.indexOf("@") + 1, field.value.length);
+
+    if ((usuario.length >= 1) &&
+      (dominio.length >= 3) &&
+      (usuario.search("@") == -1) &&
+      (dominio.search("@") == -1) &&
+      (usuario.search(" ") == -1) &&
+      (dominio.search(" ") == -1) &&
+      (dominio.search(".") != -1) &&
+      (dominio.indexOf(".") >= 1) &&
+      (dominio.lastIndexOf(".") < dominio.length - 1)) {
+      document.getElementById("msgemail").innerHTML = "<font color='green'>E-mail válido </font>";
+    }
+    else {
+      document.getElementById("msgemail").innerHTML = "<font color='red'>E-mail inválido </font>";
+    }
+  }
+</script>
+{% endblock javascript %}

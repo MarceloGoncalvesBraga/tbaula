@@ -1,0 +1,45 @@
+
+{% extends "layout_base/base.html" %}
+{% block conteudo %}
+
+<div class="blog-largo">
+  <div class="container">
+    <div class="row">
+    <div class="col-md-10 mg-top-10">
+      <div class="row">
+              <div class="col-md-5 mg-top-10">
+                <div class="col-md-5 mg-top-10">
+                
+                  <img src="{{ url_for('static', filename='img/'+ produto.get_imagem())}}" class="img-center-artigo-ativo">
+  
+ 
+               </div>
+          
+             <div class="col-md-7">
+               <div class="col-md-12">
+                <h2>{{ produto.get_Nome() }}</h2>
+                 <p>{{ produto.get_Preco() }}</p>
+              
+               </div>
+               <div class="col-md-12">
+               </div>
+             </div><!--end md-7-->
+       
+                </form>
+              </div>
+              <div class="col-md-12">
+                <a href="{{url_for('produto_atualizar', id=produto.get_id() )}}">Editar </a>
+
+              </div>
+            </div><!--end md-7-->
+      
+      <p><a href="{{url_for('home')}}">Voltar </a></p> 
+      </div><!--end row -->
+      </div><!--end md-10-->
+      
+
+  </div><!--end row-->
+</div><!--end container-->
+</div><!--end box-largo-->
+
+{% endblock %}
