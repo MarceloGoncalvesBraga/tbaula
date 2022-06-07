@@ -9,11 +9,11 @@
       <div class="row">
               <div class="col-md-5 mg-top-10">
 
-                <form method="POST" action="{{ url_for('AlterarProduto') }}" >
+                <form method="POST" action="{{ url_for('AlterarProduto', id=produto.get_id()) }}" >
                   <input type="hidden" name="id_produto" value=" {{ produto.get_id() }}">
                   
                   <label for="input">Imagem</label>
-                  <input type="text" placeholder="digite " value="{{produto.get_imagem()}}" id="input-name" name="imagem" />
+                  <input type="text" placeholder="digite " value="{{produto.get_Imagem()}}" id="input-name" name="imagem" />
                   
                   <label for="input">Nome</label>
                   <input type="text" placeholder="digite " value="{{produto.get_Nome()}}" id="input-name" name="nome" />
@@ -29,12 +29,12 @@
                     {% if produto.get_Status == 0 %}
                     <option value="{{produto.get_Status()}}"  disabled>Atual Inativo</option>
                     <option value="1">Ativo</option>
-                    {% else  produto.get_Status == 1%}
+                    {% elif  produto.get_Status == 1%}
                     <option value="{{produto.get_Status()}}"  disabled>Atual Ativo</option>
                     <option value="0">Inativo</option>
                     {% endif %}
                   </select>                  
-                  <input type="submit"/>
+                  <input type="submit" class="btn btn-light" value="Submit" />
                   
                 </form>
               </div>

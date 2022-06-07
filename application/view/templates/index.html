@@ -1,30 +1,33 @@
 
-
-
-{% extends 'layout_base/base.html' %}
-
+{% extends "layout_base/base.html" %}
 {% block conteudo %}
 
-  <h1><center> Welcome</center></h1>
-  <ul>
-      <li><a href="{{ url_for('novidades') }}">Novidades </a></li>
-      
-      <form method="POST" action="{{ url_for('novidades') }}" enctype="multipart/form-data" >
-  
-        <label for="input-nome">Nome</label>
-        <input type="text" placeholder="digite algo " id="input-name" name="name" />
-        
-        <label for="input-idade">Idade</label>
-        <input type="text" placeholder="digite sua Idade" id="input-name" name="idade" />
-        
-        <input type="submit"/>
-        
-      </form>
-      
-      @main.route("/salvar", methods=['POST'])
-      def salvar():
-      
-  </ul>
+<div class="blog-largo">
+  <div class="container">
+    <div class="row">
+    <div class="col-md-10 mg-top-10">
+      <div class="row">
+        {% for produto in produtos %}
+              <div class="col-md-5 mg-top-10">
+                  <img src="{{ url_for('static', filename='img/produtos/'+ produto.get_Imagem())}}" class="img-center-artigo-ativo"> 
+               </div>
+          
+             <div class="col-md-7">
+               <div class="col-md-12">
+                <h2>{{ produto.get_Nome() }}</h2>
+                 <p>{{ produto.get_Preco() }}</p>
+                 <a href="{{url_for('ProdutoAtualizar', id=produto.get_id() )}}">Editar </a>
 
+             </div><!--end md-12-->
+            </div><!--end md-7-->
+           {% endfor %}
+      <p><a href="{{url_for('home')}}">Voltar </a></p> 
+      </div><!--end row -->
+      </div><!--end md-10-->
+      
+
+  </div><!--end row-->
+</div><!--end container-->
+</div><!--end box-largo-->
 
 {% endblock %}
