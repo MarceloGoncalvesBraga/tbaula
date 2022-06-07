@@ -29,7 +29,7 @@ def ProdutoAtualizar(id):
                 )
     return render_template("home.html", produtos=lista_produtos)
 
-@main.route("/produto_alterar/<int:id>")
+@main.route("/produto_alterar/<int:id>", methods=['POST', 'GET'])
 def AlterarProduto(id): 
     if request.method == "POST":   
         lista_produtos = Produtos_Dao.Listar_Produtos()
@@ -46,7 +46,11 @@ def AlterarProduto(id):
                 produto.set_Preco(preco)
                 produto.set_Quantidade(quantidade)
                 produto.set_Imagem(imagem)
-    print("Ok")
+        print("Ok")
+        produtos = Produtos_Dao.Listar_Produtos()
+        return render_template("index.html",
+         produtos= produtos
+        )
 
 def InserirNovoProduto(id):    
   lista_produtos = Produtos_Dao.Listar_Produtos()      
